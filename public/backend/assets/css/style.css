@@ -49692,6 +49692,38 @@ html[dir=rtl] body.dark-only .page-wrapper .page-body-wrapper .page-body .card:n
 }
 
 /**=====================
-  5.9 Box-layout CSS Ends
+   My Code Written Here
 ==========================**/
-/*# sourceMappingURL=style.css.map */
+.card_title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.action_btn{
+
+}
+.btn_primary{
+  border: none;
+  background: #006666;
+  color: #FFF;
+  padding: 5px 9px 2px;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0px 0px 12px rgba(0,102,102,0.5);
+  transition: all 0.3s ease-in-out;
+}
+.btn_primary:hover{
+  box-shadow: 0px 0px 20px rgba(0,102,102,0.8);
+}
+.btn_danger{
+  border: none;
+  background: #dc3545;
+  color: #FFF;
+  padding: 5px 9px 2px;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0px 0px 12px rgba(220,53,69,0.5);
+}
+.btn_danger:hover{
+  box-shadow: 0px 0px 20px rgba(220,53,69,0.8);
+}

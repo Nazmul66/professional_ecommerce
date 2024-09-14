@@ -38,7 +38,7 @@
               <span class="lan-6">Categories</span></a>
 
               <ul class="sidebar-submenu">
-                <li><a href="{{ route('category.index') }}">Category</a></li>
+                <li><a href="{{ route('admin.category.index') }}">Category</a></li>
                 <li><a href="#">Sub-Category</a></li>
                 <li><a href="#">Child-Category</a></li>
               </ul>

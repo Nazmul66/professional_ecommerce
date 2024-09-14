@@ -17,6 +17,8 @@
 <script src="{{ asset('public/backend/assets/js/scrollbar/simplebar.js') }}"></script>
 <script src="{{ asset('public/backend/assets/js/scrollbar/custom.js') }}"></script>
 
+@stack('add-js')
+
 <!-- Sidebar jquery-->
 <script src="{{ asset('public/backend/assets/js/config.js') }}"></script>
 
@@ -47,8 +49,6 @@
 <script src="{{ asset('public/backend/assets/js/script.js') }}"></script>
 <script src="{{ asset('public/backend/assets/js/theme-customizer/customizer.js') }}"></script>
 
-
-@stack('add-js')
 
 <script>
     toastr.options = {

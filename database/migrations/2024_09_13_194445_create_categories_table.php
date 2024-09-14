@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('cat_name');
+            $table->string('slug')->unique();
+            $table->text('cat_image');
+            $table->integer('status')->default(1)->comment('1 = Active, 0 = Deactive');
             $table->timestamps();
         });
     }

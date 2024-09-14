@@ -10,9 +10,9 @@ Route::group(['prefix' => 'admin'], function(){
 
 
     //____ Category ____//
-    Route::resource('category', CategoryController::class)->names('category');
-    Route::get('/get-category',[CategoryController::class,'getData'])->name('get-category');
-    Route::post('/category/status',[CategoryController::class,'adminCategoryStatus'])->name('category.status');
+    Route::resource('category', CategoryController::class)->names('admin.category');
+    Route::get('/get-category',[CategoryController::class,'getData'])->name('admin.get-category');
+    Route::post('/category/status',[CategoryController::class,'adminCategoryStatus'])->name('admin.category.status');
 
 });
 
