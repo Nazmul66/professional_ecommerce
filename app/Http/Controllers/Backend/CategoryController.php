@@ -49,6 +49,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
+        $request->validate(
+            [
+                'cat_name' => ['required', 'unique:categories', 'max:255'],
+                'cat_image' => ['required', 'image'],
+                'status' => ['required'],
+            ],
+            [
+                'cat_name.required' => 'Please fill up category name',
+                'cat_name.max' => 'Character might be 255',
+                'cat_name.unique' => 'Character might be unique',
+                'cat_image.required' => 'cat Image is required',
+                'status.required' => 'status is required',
+            ]
+        );
+
         $category = new Category();
 
         $category->cat_name            = $request->cat_name;
@@ -106,8 +122,21 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request->all());
-
         $category  = Category::find($id);
+
+        $request->validate(
+            [
+                'cat_name' => ['required', 'max:255', 'unique:categories,cat_name,'. $category->id ],
+                'status' => ['required'],
+            ],
+            [
+                'cat_name.required' => 'Please fill up category name',
+                'cat_name.max' => 'Character might be 255',
+                'cat_name.unique' => 'Character might be unique',
+                'status.required' => 'status is required',
+            ]
+        );
+
 
         $category->cat_name            = $request->cat_name;
         $category->slug                = Str::slug($request->cat_name);

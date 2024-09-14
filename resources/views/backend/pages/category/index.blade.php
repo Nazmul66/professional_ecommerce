@@ -94,6 +94,8 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="cat_name">Category Name</label>
                                             <input class="form-control" id="cat_name" name="cat_name" type="text" placeholder="Write here....">
+                                            
+                                            <span id="name_validate" class="txt-secondary mt-1"></span>
                                         </div>
                                     </div>
 
@@ -101,6 +103,8 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="cat_image">Category Image</label>
                                             <input class="form-control" id="cat_image" name="cat_image" type="file">
+
+                                            <span id="image_validate" class="txt-secondary mt-1"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +116,8 @@
                                         <option value="1">Active</option>
                                         <option value="0">Deactive</option>
                                     </select>
+
+                                    <span id="status_validate" class="txt-secondary mt-1"></span>
                                 </div>
 
                                 <div class="col-12">
@@ -299,7 +305,13 @@
                 }
             },
             error: function (err) {
-                console.error('Error:', err);
+                console.log('Error:', err);
+                let error = err.responseJSON.errors;
+
+                $('#name_validate').empty().html(error.cat_name);
+                $('#image_validate').empty().html(error.cat_image);
+                $('#status_validate').empty().html(error.status);
+                
                 swal.fire({
                     title: "Failed",
                     text: "Something Went Wrong !",
