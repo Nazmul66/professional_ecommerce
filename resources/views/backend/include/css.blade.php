@@ -54,6 +54,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/backend/assets/css/style.css') }}">
     <link id="color" rel="stylesheet" href="{{ asset('public/backend/assets/css/color-1.css') }}" media="screen">
 
+    <!-- Select2 js-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     

@@ -49700,7 +49700,9 @@ html[dir=rtl] body.dark-only .page-wrapper .page-body-wrapper .page-body .card:n
     align-items: center;
 }
 .action_btn{
-
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .btn_primary{
   border: none;

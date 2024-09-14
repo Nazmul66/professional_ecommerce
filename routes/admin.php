@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 
 
 Route::group(['prefix' => 'admin'], function(){
@@ -20,6 +21,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('subCategory', SubCategoryController::class)->names('admin.subCategory');
     Route::get('/get-subCategory',[SubCategoryController::class,'getData'])->name('admin.get-subCategory');
     Route::post('/subCategory/status',[SubCategoryController::class,'adminSubCategoryStatus'])->name('admin.subCategory.status');
+
+
+    //____ ChildCategory ____//
+    Route::resource('childCategory', ChildCategoryController::class)->names('admin.childCategory');
+    Route::get('/get-childCategory',[ChildCategoryController::class,'getData'])->name('admin.get-childCategory');
+    Route::post('/childCategory/status',[ChildCategoryController::class,'adminChildCategoryStatus'])->name('admin.childCategory.status');
 
 });
 

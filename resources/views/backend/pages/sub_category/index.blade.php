@@ -160,7 +160,7 @@
             <div class="modal-content">
                 
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Update Category</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Update Sub-Category</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -432,6 +432,10 @@
             },
             error: function (err) {
                 console.error('Error:', err);
+                let error = err.responseJSON.errors;
+
+               $('#up_name_validate').empty().html(error.name);
+            
                 swal.fire({
                     title: "Failed",
                     text: "Something Went Wrong !",

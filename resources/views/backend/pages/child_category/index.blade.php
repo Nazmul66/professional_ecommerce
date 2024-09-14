@@ -1,7 +1,7 @@
 @extends('backend.layout.master')
 
 @push('meta-title')
-    Riho - Category Section
+    Riho - ChildCategory Section
 @endpush
 
 @push('add-css')
@@ -16,7 +16,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-6">
-            <h4>Category Manage</h4>
+            <h4>ChildCategory Manage</h4>
             </div>
             
             <div class="col-6"> 
@@ -26,7 +26,7 @@
                             <svg style="color: #FFF;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1); "><path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z"></path></svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active">Category</li>
+                    <li class="breadcrumb-item active">ChildCategory</li>
                 </ol>
             </div>
         </div>
@@ -41,19 +41,21 @@
                 <div class="card">
                     <div class="card-header">
                     <div class="card_title">
-                        <h4>All Category Tables</h4>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_Modal">Create Category</button>
+                        <h4>All ChildCategory Tables</h4>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_Modal">Create ChildCategory</button>
                     </div>
                     </div>
                     
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-dashed" id="categoryTables">
+                            <table class="table table-dashed" id="childCategoryTables">
                             <thead>
                                 <tr>
                                     <th scope="col">SL. </th>
-                                    <th scope="col">Category Image</th>
+                                    <th scope="col">Image</th>
                                     <th scope="col">Category Name</th>
+                                    <th scope="col">SubCategory Name</th>
+                                    <th scope="col">ChildCategory Name</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -79,7 +81,7 @@
             <div class="modal-content">
                 
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Create Category</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Create ChildCategory</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -92,32 +94,64 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="cat_name">Category Name</label>
-                                            <input class="form-control" id="cat_name" name="cat_name" type="text" placeholder="Write here....">
-                                            
-                                            <span id="name_validate" class="txt-secondary mt-1"></span>
+                                            <label class="form-label" for="category_id">Category Name</label>
+                                            <select class="form-select btn-square digits" id="category_id" name="category_id">
+                                                <option value="" disabled selected>Select your category</option>
+                                                @foreach ($categories as $row)
+                                                   <option value="{{ $row->id }}">{{ $row->cat_name }}</option>
+                                                @endforeach
+                                            </select>
+        
+                                            <span id="category_validate" class="txt-secondary mt-1"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="cat_image">Category Image</label>
-                                            <input class="form-control" id="cat_image" name="cat_image" type="file">
+                                            <label class="form-label" for="subCategory_id">SubCategory Name</label>
+                                            <select class="form-select btn-square digits" id="subCategory_id" name="subCategory_id">
+                                                <option value="" disabled selected>Select your subCategory</option>
+                                                @foreach ($subCategories as $row)
+                                                   <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                @endforeach
+                                            </select>
+        
+                                            <span id="subCategory_validate" class="txt-secondary mt-1"></span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="name">ChildCategory Name</label>
+                                            <input class="form-control" id="name" name="name" type="text" placeholder="Write here....">
+                                            
+                                            <span id="childCategory_validate" class="txt-secondary mt-1"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="image">ChildCategory Image</label>
+                                            <input class="form-control" id="image" name="image" type="file">
+    
                                             <span id="image_validate" class="txt-secondary mt-1"></span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="status">Status</label>
-                                    <select class="form-select btn-square digits" id="status" name="status">
-                                        <option value="" disabled selected>Select your Status</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Deactive</option>
-                                    </select>
-
-                                    <span id="status_validate" class="txt-secondary mt-1"></span>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="status">Status</label>
+                                        <select class="form-select btn-square digits" id="status" name="status">
+                                            <option value="" disabled selected>Select your Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Deactive</option>
+                                        </select>
+    
+                                        <span id="status_validate" class="txt-secondary mt-1"></span>
+                                    </div>
                                 </div>
 
                                 <div class="col-12">
@@ -139,7 +173,7 @@
             <div class="modal-content">
                 
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myExtraLargeModal">Update Category</h4>
+                    <h4 class="modal-title" id="myExtraLargeModal">Update Child-Category</h4>
                     <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -155,30 +189,58 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="up_cat_name">Category Name</label>
-                                            <input class="form-control" id="up_cat_name" name="cat_name" type="text" placeholder="Write here....">
-
-                                            <span id="up_name_validate" class="txt-secondary mt-1"></span>
+                                            <label class="form-label" for="up_category_id">Category Name</label>
+                                            <select class="form-select btn-square digits" id="up_category_id" name="category_id">
+                                                <option value="" disabled selected>Select your category</option>
+                                                @foreach ($categories as $row)
+                                                   <option value="{{ $row->id }}">{{ $row->cat_name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="cat_image">Category Image</label>
-                                            <input class="form-control" id="cat_image" name="cat_image" type="file">
+                                            <label class="form-label" for="up_subCategory_id">SubCategory Name</label>
+                                            <select class="form-select btn-square digits" id="up_subCategory_id" name="subCategory_id">
+                                                <option value="" disabled selected>Select your subCategory</option>
+                                                @foreach ($subCategories as $row)
+                                                   <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="up_name">ChildCategory Name</label>
+                                            <input class="form-control" id="up_name" name="name" type="text" placeholder="Write here....">
+                                            
+                                            <span id="up_childCategory_validate" class="txt-secondary mt-1"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="image">ChildCategory Image</label>
+                                            <input class="form-control" id="image" name="image" type="file">
+    
                                             <div id="showImage"></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="up_status">Status</label>
-                                    <select class="form-select btn-square digits" id="up_status" name="status">
-                                        <option value="" disabled selected>Select your Status</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Deactive</option>
-                                    </select>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="up_status">Status</label>
+                                        <select class="form-select btn-square digits" id="up_status" name="status">
+                                            <option value="" disabled selected>Select your Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Deactive</option>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="col-12">
@@ -203,13 +265,13 @@
     $(document).ready(function(){
 
     // show all data
-    let categoryTables = $('#categoryTables').DataTable({
+    let childCategoryTables = $('#childCategoryTables').DataTable({
         order: [
             [0, 'asc']
         ],
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.get-category') }}",
+        ajax: "{{ route('admin.get-childCategory') }}",
         // pageLength: 30,
 
         columns: [
@@ -220,10 +282,16 @@
                 searchable: false
             },
             {
-                data: 'cat_image'
+                data: 'image'
             },
             {
                 data: 'cat_name'
+            },
+            {
+                data: 'subCat_name'
+            },
+            {
+                data: 'childCat_name'
             },
             {
                 data: 'status',
@@ -247,14 +315,14 @@
 
         $.ajax({
             type: "POST",
-            url: "{{ route('admin.category.status') }}",
+            url: "{{ route('admin.childCategory.status') }}",
             data: {
                 // '_token': token,
                 id: id,
                 status: status
             },
             success: function (res) {
-                categoryTables.ajax.reload();
+                childCategoryTables.ajax.reload();
 
                 if (res.status == 1) {
                     swal.fire(
@@ -288,7 +356,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ route('admin.category.store') }}",
+            url: "{{ route('admin.childCategory.store') }}",
             data: formData,
             processData: false,  // Prevent jQuery from processing the data
             contentType: false,  // Prevent jQuery from setting contentType
@@ -297,7 +365,7 @@
                 if (res.status === true) {
                     $('#create_Modal').modal('hide');
                     $('#createForm')[0].reset();
-                    categoryTables.ajax.reload();
+                    childCategoryTables.ajax.reload();
 
                     swal.fire({
                         title: "Success",
@@ -310,8 +378,10 @@
                 console.log('Error:', err);
                 let error = err.responseJSON.errors;
 
-                $('#name_validate').empty().html(error.cat_name);
-                $('#image_validate').empty().html(error.cat_image);
+                $('#category_validate').empty().html(error.category_id);
+                $('#subCategory_validate').empty().html(error.subCategory_id);
+                $('#childCategory_validate').empty().html(error.name);
+                $('#image_validate').empty().html(error.image);
                 $('#status_validate').empty().html(error.status);
                 
                 swal.fire({
@@ -333,7 +403,7 @@
             // headers: {
             //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             // },
-            url: "{{ url('admin/category') }}/" + id + "/edit",
+            url: "{{ url('admin/childCategory') }}/" + id + "/edit",
             processData: false,  // Prevent jQuery from processing the data
             contentType: false,  // Prevent jQuery from setting contentType
             success: function (res) {
@@ -341,10 +411,12 @@
                 // console.log(data)
 
                 $('#up_id').val(data.id);
-                $('#up_cat_name').val(data.cat_name);
+                $('#up_category_id').val(data.category_id);
+                $('#up_subCategory_id').val(data.subCategory_id);
+                $('#up_name').val(data.name);
                 $('#showImage').html('');
                 $('#showImage').append(`
-                    <img src={{ asset("`+ data.cat_image +`") }} alt="" style="width: 75px;">
+                    <img src={{ asset("`+ data.image +`") }} alt="" style="width: 75px;">
                 `);
                 $('#up_status').val(data.status);
             },
@@ -366,7 +438,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('admin/category') }}/" + id,
+            url: "{{ url('admin/childCategory') }}/" + id,
             data: formData,
             processData: false,  // Prevent jQuery from processing the data
             contentType: false,  // Prevent jQuery from setting contentType
@@ -374,19 +446,19 @@
 
                 swal.fire({
                     title: "Success",
-                    text: "Category Edited",
+                    text: "SubCategory Edited",
                     icon: "success"
                 })
 
                 $('#editModal').modal('hide');
                 $('#updateForm')[0].reset();
-                categoryTables.ajax.reload();
+                childCategoryTables.ajax.reload();
             },
             error: function (err) {
                 console.error('Error:', err);
                 let error = err.responseJSON.errors;
 
-                $('#up_name_validate').empty().html(error.cat_name);
+                $('#up_childCategory_validate').empty().html(error.name);
 
                 swal.fire({
                     title: "Failed",
@@ -416,7 +488,7 @@
                 $.ajax({
                     type: 'DELETE',
 
-                    url: "{{ url('admin/category') }}/" + id,
+                    url: "{{ url('admin/childCategory') }}/" + id,
                     data: {
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -429,7 +501,7 @@
                             icon: "success"
                         });
 
-                        categoryTables.ajax.reload();
+                        childCategoryTables.ajax.reload();
                     },
                     error: function (err) {
                         console.log('error')
