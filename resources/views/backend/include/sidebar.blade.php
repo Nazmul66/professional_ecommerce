@@ -39,7 +39,7 @@
 
               <ul class="sidebar-submenu">
                 <li><a href="{{ route('admin.category.index') }}">Category</a></li>
-                <li><a href="#">Sub-Category</a></li>
+                <li><a href="{{ route('admin.subCategory.index') }}">Sub-Category</a></li>
                 <li><a href="#">Child-Category</a></li>
               </ul>
           </li>

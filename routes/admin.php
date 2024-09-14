@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
-use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Backend\SubCategoryController;
+
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/dashboard', [AdminController::class, "dashboard"])->name('dashboard');
@@ -13,6 +14,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('category', CategoryController::class)->names('admin.category');
     Route::get('/get-category',[CategoryController::class,'getData'])->name('admin.get-category');
     Route::post('/category/status',[CategoryController::class,'adminCategoryStatus'])->name('admin.category.status');
+
+
+    //____ SubCategory ____//
+    Route::resource('subCategory', SubCategoryController::class)->names('admin.subCategory');
+    Route::get('/get-subCategory',[SubCategoryController::class,'getData'])->name('admin.get-subCategory');
+    Route::post('/subCategory/status',[SubCategoryController::class,'adminSubCategoryStatus'])->name('admin.subCategory.status');
 
 });
 
