@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\BrandController;
 
 
 Route::group(['prefix' => 'admin'], function(){
@@ -27,6 +28,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('childCategory', ChildCategoryController::class)->names('admin.childCategory');
     Route::get('/get-childCategory',[ChildCategoryController::class,'getData'])->name('admin.get-childCategory');
     Route::post('/childCategory/status',[ChildCategoryController::class,'adminChildCategoryStatus'])->name('admin.childCategory.status');
+
+
+    //____ Brand ____//
+    Route::resource('brand', BrandController::class)->names('admin.brand');
+    Route::get('/get-brand',[BrandController::class,'getData'])->name('admin.get-brand');
+    Route::post('/brand/status',[BrandController::class,'adminBrandStatus'])->name('admin.brand.status');
 
 });
 
